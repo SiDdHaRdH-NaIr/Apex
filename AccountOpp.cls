@@ -27,4 +27,38 @@ public class AccountOpp{
             System.debug(opp.Name + ' --> ' + opp.Account.Name);
         }
     }
+    public static void oppAccount(){
+        List<Opportunity> oppList = [
+            SELECT Id,Name,Account.Name
+            FROM Opportunity
+            WHERE Name LIKE '%Test%'
+        ];
+        for (Opportunity opp : oppList) {
+            if (opp.Account != null) {
+                System.debug(opp.Name + ' ---> ' + opp.Account.Name);
+            }
+            else {
+            System.debug(opp.Name + ' --> No Account');
+            }
+        }
+    }
+    public static void accountOppList(){
+    List<Opportunity> oppList = [
+        SELECT Id, Name, Account.Name
+        FROM Opportunity
+        WHERE Account.Name LIKE 'A%' 
+        AND NOT Name LIKE '%Test%'
+    ];
+
+    for (Opportunity opp : oppList) {
+        System.debug(opp.Account.Name + ' --> ' + opp.Name);
+    }
+ }
+    public static void oppAccountList(){
+        List<Opportunity> oppList = [
+            SELECT Id,Name,Account.Name
+            FROM Opportunity
+            WHERE Account.Name LIKE '%Crop%'
+        ];
+    }
 }

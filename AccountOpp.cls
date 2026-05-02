@@ -54,11 +54,16 @@ public class AccountOpp{
         System.debug(opp.Account.Name + ' --> ' + opp.Name);
     }
  }
-    public static void oppAccountList(){
-        List<Opportunity> oppList = [
-            SELECT Id,Name,Account.Name
-            FROM Opportunity
-            WHERE Account.Name LIKE '%Crop%'
-        ];
+   public static void oppAccountList(){
+    List<Opportunity> oppList = [
+        SELECT Id, Name, Account.Name
+        FROM Opportunity
+        WHERE Account.Name LIKE '%Corp%' 
+        AND (Name LIKE '%Deal%' OR Name LIKE '%Sale%')
+    ];
+
+    for (Opportunity opp : oppList){
+        System.debug(opp.Name + ' --> ' + opp.Account.Name);
     }
+}
 }
